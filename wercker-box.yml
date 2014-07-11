@@ -1,5 +1,5 @@
 name: cljx-box
-version: 0.0.1
+version: 0.0.2
 inherits: vgeshel/clojure@0.0.2
 type: main
 platform: ubuntu@12.04
@@ -20,9 +20,22 @@ script: |
   sudo apt-get update
   sudo apt-get install nodejs -y
 
+  # phantomjs
+  export PHANTOM_VERSION=1.9.7
+  wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-$PHANTOM_VERSION-linux-x86_64.tar.bz2
+  tar xfj phantomjs-$PHANTOM_VERSION-linux-x86_64.tar.bz2
+  sudo cp phantomjs-$PHANTOM_VERSION-linux-x86_64/bin/phantomjs /usr/local/bin
+
+  type phantomjs || { echo "I expected phantomjs to be available. Aborting."; exit 1; }
+  phantomjs -v
+
   # We should have lein available
   type lein || { echo "I expected lein to be available. Aborting."; exit 1; }
   lein help
   # We should have npm available
   type npm || { echo "I expected npm to be available. Aborting."; exit 1; }
   sudo npm install -g karma karma-cli karma-jasmine jasmine-node karma-phantomjs-launcher
+
+
+
+
