@@ -1,0 +1,28 @@
+name: cljx-box
+version: 0.0.1
+inherits: vgeshel/clojure@0.0.2
+type: main
+platform: ubuntu@12.04
+description: A box with tools you need for testing Clojure + ClojureScript libraries
+keywords:
+  - clojure
+  - clojurescript
+  - cljx
+  - leiningen
+  - nodejs
+  - karma
+packages:
+  - leiningen
+  - clojure
+  - nodejs
+script: |
+  sudo add-apt-repository ppa:chris-lea/node.js -y
+  sudo apt-get update
+  sudo apt-get install nodejs -y
+
+  # We should have lein available
+  type lein || { echo "I expected lein to be available. Aborting."; exit 1; }
+  lein help
+  # We should have npm available
+  type npm || { echo "I expected npm to be available. Aborting."; exit 1; }
+  sudo npm install -g karma karma-cli karma-jasmine jasmine-node karma-phantomjs-launcher
