@@ -18,7 +18,7 @@ packages:
 script: |
   sudo add-apt-repository ppa:chris-lea/node.js -y
   sudo apt-get update
-  sudo apt-get install nodejs -y
+  sudo apt-get install nodejs libfontconfig1 libfreetype6 -y
 
   # phantomjs
   export PHANTOM_VERSION=1.9.7
